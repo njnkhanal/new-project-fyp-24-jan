@@ -12,3 +12,10 @@
 # run the project
 
 `php artisan serve`
+
+# database + migration
+
+for migrate:
+`php artisan migrate`
+for rollback:
+`php artisan migrate:rollback` after rollback must migrate again
