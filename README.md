@@ -19,3 +19,6 @@ for migrate:
 `php artisan migrate`
 for rollback:
 `php artisan migrate:rollback` after rollback must migrate again
+
+# make controller
+`php artisan make:controller AdminController`
