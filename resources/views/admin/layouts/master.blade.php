@@ -10,6 +10,13 @@
         @include('admin.layouts.header')
         <!-- End Navbar -->
         <div class="container-fluid py-4">
+            <div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        <strong>{{ session('success') }}</strong>
+                    </div>
+                @endif
+            </div>
             @yield('body-content')
         </div>
     </main>

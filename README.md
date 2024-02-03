@@ -21,4 +21,14 @@ for rollback:
 `php artisan migrate:rollback` after rollback must migrate again
 
 # make controller
+
 `php artisan make:controller AdminController`
+
+# laravel crud
+
+pattern (MVC)
+
+1. make model with its controller, migration and conroller resources
+   `php artisan make:model Category -mcr`
+   `php artisan make:controller UserController -r` // to make controller
+   `php artisan make:migration create_model_table` // to make migration
