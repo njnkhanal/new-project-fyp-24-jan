@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>price</th>
+            <th>qt</th>
+            <th>totalPrice</th>
+        </tr>
+        @foreach ($carts as $key => $cart)
+
+            <tr>
+                <td>1</td>
+                <td>
+                    100
+                    <input type="hidden" value="100" id="perPrice{{$key}}">
+                </td>
+                <td>
+                    <button class="AddQt" aff-id="#qt{{$key}}">Add</button>
+                    <input type="number" name="qt" id="qt{{$key}}" perPrice-id="#perPrice{{$key}}" showTotalPrice-id="#showTotalPrice{{$key}}">
+                    <button class="DecQt" aff-id="#qt{{$key}}">Dec</button>
+                </td>
+                <td id="showTotalPrice{{$key}}">100</td>
+            </tr>
+
+        @endforeach
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('.AddQt').click(function (e) { 
+                e.preventDefault();
+                let qtId = $(this).attr('aff-id');
+                let qt = $(qtId).val();
+                let perPrice = $($(qtId).attr('perPrice-id')).val();
+                if(perPrice && qt  && parseInt(qt) < 5){
+                    $(qtId).val(parseInt(qt) + 1);
+                    let total = parseFloat(perPrice) * parseInt(qt);
+                    $($(qtId).attr('showTotalPrice-id')).empty();
+                    $($(qtId).attr('showTotalPrice-id')).append(total);
+                }
+            });
+            $('.DecQt').click(function (e) { 
+                e.preventDefault();
+                let qtId = $(this).attr('aff-id');
+                let qt = $(qtId).val();
+                let perPrice = $($(qtId).attr('perPrice-id')).val();
+                if(perPrice && qt && parseInt(qt) > 0){
+                    $(qtId).val(parseInt(qt) - 1);
+                    let total = parseFloat(perPrice) * parseInt(qt);
+                    $($(qtId).attr('showTotalPrice-id')).empty();
+                    $($(qtId).attr('showTotalPrice-id')).append(total);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
