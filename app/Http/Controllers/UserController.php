@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -44,7 +45,10 @@ class UserController extends Controller
         ]);
 
         $data = $request->all();
-        $user = User::create($data);
+        if($request->password){
+            $data['password'] = Hash::make($request->password);
+        }
+        User::create($data);
         return redirect()->route('admin.user.index')->with('success', 'User Created Successfully');
     }
 
@@ -67,7 +71,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.pages.Users.edit',compact('user'));
     }
 
     /**
@@ -79,7 +84,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $user = User::findOrFail($id);
+        $request->validate([
+            'name' => 'required|min:3|string',
+            'email' => 'required|email|unique:users,email,'. $user->id,
+            'password' => 'nullable|min:8|string',
+            'role' => 'required|in:user,admin',
+        ]);
+        $data = $request->all();
+        if($request->password){
+            $data['password'] = Hash::make($request->password);
+        }else{
+            $data['password'] = $user->password;
+        }
+        $user->update($data);
+        return redirect()->route('admin.user.index')->with('success','Data Updated Successfully');
     }
 
     /**
@@ -90,6 +110,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return back()->with('success', 'Data Deleted Successfully!');
     }
 }
