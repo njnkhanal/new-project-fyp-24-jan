@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -21,5 +23,11 @@ class FrontendController extends Controller
     {
         $products = User::all();
         return view('frontend.pages.list', compact('products'));
+    }
+
+    public function checkout()
+    {
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        return view('frontend.pages.checkout', compact('carts'));
     }
 }

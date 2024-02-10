@@ -14,7 +14,12 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $product->name }}</h5>
                                         <h6 class="card-subtitle mb-2 text-muted ">{{ $product->email }}</h6>
-                                        <a class="btn btn-info" href="#">Add to cart</a>
+                                        <form action="{{ route('cart.store') }}" method="POST">
+                                            @csrf
+                                            <input type="number" value="{{ $product->id }}" name="product"
+                                                class="d-none" />
+                                            <button class="btn btn-info" type="submit">Add to cart</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

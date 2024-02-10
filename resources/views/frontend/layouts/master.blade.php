@@ -35,7 +35,8 @@
                             href="{{ route('front.list') }}">List</a>
                         <a class="nav-link {{ Request::segment(1) == 'about' ? 'active' : '' }}" aria-current="page"
                             href="{{ route('front.about') }}">About</a>
-
+                        <a class="nav-link {{ Request::segment(1) == 'cart' ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('cart.index') }}">Cart</a>
                     </div>
                     <div class="ml-auto">
                         <ul class="navbar-nav">
