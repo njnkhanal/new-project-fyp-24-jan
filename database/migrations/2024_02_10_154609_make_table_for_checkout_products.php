@@ -17,6 +17,7 @@ class MakeTableForCheckoutProducts extends Migration
             $table->id();
             $table->integer('checkout_id')->nullable();
             $table->integer('product_id')->nullable();
+            $table->integer('quantity')->default(0);
             $table->timestamps();
         });
     }

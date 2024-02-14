@@ -18,6 +18,16 @@ class CreateCheckoutsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('name')->nullable();
             $table->integer('email')->nullable();
+            $table->integer('phone')->nullable();
+            $table->integer('address')->nullable();
+            $table->integer('city')->nullable();
+            $table->integer('state')->nullable();
+            $table->integer('country')->nullable();
+            $table->integer('zip')->nullable();
+            // required fields
+            $table->enum('payment_status', ['paid', 'pending'])->default('pending');
+            $table->string('payment_method')->default('cod');
+            $table->double('to_pay')->default(0.0);
             $table->timestamps();
         });
     }

@@ -19,6 +19,14 @@
                             <input type="text" name="email" id="email" class="form-control"
                                 placeholder="Enter Email">
                         </div>
+                        <div class="form-group">
+                            <label for="payment_method">Payment Method</label>
+                            <select name="payment_method" class="form-control" id="payment_method">
+                                <option value="cod">Cash on delivery</option>
+                                <option value="khalti">Pay with khalti</option>
+                                <option value="reward">Pay with reward</option>
+                            </select>
+                        </div>
                         <button class="mt-3 btn btn-success" type="submit">Checkout</button>
                     </form>
                 </div>
