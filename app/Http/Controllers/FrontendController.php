@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class FrontendController extends Controller
 {
@@ -29,5 +30,17 @@ class FrontendController extends Controller
     {
         $carts = Cart::where('user_id', Auth::user()->id)->get();
         return view('frontend.pages.checkout', compact('carts'));
+    }
+
+    public function weatherCall()
+    {
+        $lat = 100;
+        $lon = 98.5;
+        $apiKey = env('WEATHER_KEY');
+        $url = 'https://api.openweathermap.org/data/3.0/onecall?lat=' . $lat . '&lon=' . $lon . '&exclude=hourly&appid=' . $apiKey;
+        // install http package 'composer require guzzlehttp/guzzle'
+        $response = Http::get($url);
+        dd($response);
+        return view('frontend.pages.weather');
     }
 }
