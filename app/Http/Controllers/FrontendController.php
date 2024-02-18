@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -42,5 +44,13 @@ class FrontendController extends Controller
         $response = Http::get($url);
         dd($response);
         return view('frontend.pages.weather');
+    }
+
+    public function contactForm(Request $request)
+    {
+        // validation if needed
+        $data = $request->all();
+        Mail::to('admin@admin.com')->send(new ContactMail($data));
+        return back()->with('success', 'Contact submitted');
     }
 }

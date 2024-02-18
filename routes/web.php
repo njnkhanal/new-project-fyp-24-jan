@@ -24,6 +24,8 @@ Route::get('/list', [FrontendController::class, 'list'])->name('front.list');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('/contact/form', [FrontendController::class, 'contactForm'])->name('contact.submit');
+
 Route::middleware('auth')->group(function () {
     Route::resource('cart', CartController::class);
     Route::get('/checkout', [FrontendController::class, 'checkout'])->name('user.checkout');
