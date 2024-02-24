@@ -32,3 +32,12 @@ pattern (MVC)
    `php artisan make:model Category -mcr`
    `php artisan make:controller UserController -r` // to make controller
    `php artisan make:migration create_model_table` // to make migration
+
+# Queue
+
+`php artisan queue:table`
+// make queue job for contact form
+`php artisan make:job SendContactEmailJob`
+
+\*\* need to run queue work
+`php artisan queue:work`

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendContactEmailJob;
 use App\Mail\ContactMail;
 use App\Models\Cart;
 use App\Models\User;
@@ -50,7 +51,7 @@ class FrontendController extends Controller
     {
         // validation if needed
         $data = $request->all();
-        Mail::to('admin@admin.com')->send(new ContactMail($data));
+        dispatch(new SendContactEmailJob($data));
         return back()->with('success', 'Contact submitted');
     }
 }

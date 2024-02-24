@@ -10,6 +10,13 @@
                     the
                     bulk of the
                     card's content.</p>
+
+                <form action="{{ route('contact.submit') }}" method="post">
+                    @csrf
+                    <input type="text" name="first_name" placeholder="First Name">
+                    <input type="text" name="last_name" placeholder="Last Name">
+                    <button type="submit">Contact</button>
+                </form>
             </div>
         </div>
     </section>
